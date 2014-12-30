@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <!-- Projekt TicTacToe des Informatikkurses im Pfarrwiesen-Gymnasium 2014-2015, Fertiggestellt am 17.12.2014! -->
+<center> 
+<!-- Das sind die gesamten Felder dses Tic-Tac-Toe Spiels. -->
+<img onclick="Feld1()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+<img onclick="Feld2()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+<img onclick="Feld3()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+<br>
+<img onclick="Feld4()" src="Feld.jpg" alt="No image" style="width:200px;height:200px"> 
+<img onclick="Feld5()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+<img onclick="Feld6()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+<br>
+<img onclick="Feld7()" src="Feld.jpg" alt="No image" style="width:200px;height:200px"> 
+<img onclick="Feld8()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+<img onclick="Feld9()" src="Feld.jpg" alt="No image" style="width:200px;height:200px">
+</center>
+<!-- Hier wird die Position der Felder bestimmt. -->
+<div id="Feld1Div" style="position:absolute;top:100px;left:750px;"> </div>
+<div id="Feld2Div" style="position:absolute;top:100px;left:950px;"> </div>
+<div id="Feld3Div" style="position:absolute;top:100px;left:1150px;"> </div>
+
+<div id="Feld4Div" style="position:absolute;top:300px;left:750px;"> </div>
+<div id="Feld5Div" style="position:absolute;top:300px;left:950px;"> </div>
+<div id="Feld6Div" style="position:absolute;top:300px;left:1150px;"> </div>
+
+<div id="Feld7Div" style="position:absolute;top:500px;left:750px;"> </div>
+<div id="Feld8Div" style="position:absolute;top:500px;left:950px;"> </div>
+<div id="Feld9Div" style="position:absolute;top:500px;left:1150px;"> </div>
+<!-- War nur für Tests wichtig, wollte das aber nicht herauslöschen. -->
+<p id="demo"></p>
+<p id="test"></p>
+<p id="teststatus"></p>
+<p id="test1"></p>
+<p id="test2"></p>
+
+<script>
+//Hier sind die Variablen für unsere verschiedenen Funktionen.
+var turn = 1;
+var sit = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var gewinn = false;
+//Die Toggle-Funktion, die bestimmt wer an der Reihe ist.
+function toggle() {
+	if (turn == 1) {
+		turn = 2; 
+	} else {
+		turn = 1;
+	}
+}
+//Die won-Funktion, die bestimmt wer wann gewonnen hat bzw. überprüft sie mithilfe mehrerer Punkte das gesamte Spielfeld auf einen Gewinner.
+function won() {
+	if (sit[0] != 0) {
+		if ((sit[0] == sit[1]) && (sit[1] == sit[2])) {
+			gewinn = true;
+		}
+		if ((sit[0] == sit[3]) && (sit[3] == sit[6])) {
+			gewinn = true;
+		}
+		if ((sit[0] == sit[4]) && (sit[4] == sit[8])) {
+			gewinn = true;
+		}
+	}
+	if (sit[4] != 0) {
+		if ((sit[4] == sit[3]) && (sit[4] == sit[5])) {
+			gewinn = true;
+		}
+		if ((sit[4] == sit[1]) && (sit[4] == sit[7])) {
+			gewinn = true;
+		}
+		if ((sit[4] == sit[2]) && (sit[4] == sit[6])) {
+			gewinn = true;
+		}
+	}	
+	if (sit[8] != 0) {
+		if ((sit[8] == sit[2]) && (sit[8] == sit[5])) {
+			gewinn = true;
+		}
+		if ((sit[8] == sit[7]) && (sit[8] == sit[6])) {
+			gewinn = true;
+		}
+	}
+	if (gewinn == true) {
+		if (turn == 1) {
+			alert (" Du hast gewonnen Spieler X\n\nBitte Seite neu laden um neu zu starten");
+		} else {
+			alert (" Du hast gewonnen Spieler O\n\nBitte Seite neu laden um neu zu starten");
+		}
+	}
+}
+//Hier wird nun bestimmt ob ein X oder eine 0 in das Feld (0-8) auf das geklickt wurde, eingetragen werden soll.
+function Feld1() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[0];	
+	if (sit[0] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld1Div").innerHTML = "X";
+			sit[0] = 1;
+		} else {
+			document.getElementById("Feld1Div").innerHTML = "0";
+			sit[0] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[0];
+}
+
+function Feld2() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[1];
+	if (sit[1] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld2Div").innerHTML = "X";
+			sit[1] = 1;
+		} else {
+			document.getElementById("Feld2Div").innerHTML = "0";
+			sit[1] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[1];
+}
+
+function Feld3() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[2];
+	if (sit[2] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld3Div").innerHTML = "X";
+			sit[2] = 1;
+		} else {
+			document.getElementById("Feld3Div").innerHTML = "0";
+			sit[2] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[2];
+}
+
+function Feld4() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[3];
+	if (sit[3] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld4Div").innerHTML = "X";
+			sit[3] = 1;
+		} else {
+			document.getElementById("Feld4Div").innerHTML = "0";
+			sit[3] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[3];
+}
+
+function Feld5() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[4];
+	if (sit[4] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld5Div").innerHTML = "X";
+			sit[4] = 1;
+		} else {
+			document.getElementById("Feld5Div").innerHTML = "0";
+			sit[4] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[4];
+}
+
+function Feld6() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[5];
+	if (sit[5] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld6Div").innerHTML = "X";
+			sit[5] = 1;
+		} else {
+			document.getElementById("Feld6Div").innerHTML = "0";
+			sit[5] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[5];
+}
+
+function Feld7() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[6];
+	if (sit[6] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld7Div").innerHTML = "X";
+			sit[6] = 1;
+		} else {
+			document.getElementById("Feld7Div").innerHTML = "0";
+			sit[6] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[6];
+}
+
+function Feld8() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[7];
+	if (sit[7] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld8Div").innerHTML = "X";
+			sit[7] = 1;
+		} else {
+			document.getElementById("Feld8Div").innerHTML = "0";
+			sit[7] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[7];
+}
+
+function Feld9() {
+//    var x = event.clientX;
+//    var y = event.clientY;
+//    var coords = "X coords: " + x + ", Y coords: " + y;
+//    document.getElementById("demo").innerHTML = coords; 
+	document.getElementById("test").innerHTML = turn;
+	document.getElementById("teststatus").innerHTML = sit[8];
+	if (sit[8] == 0) {
+	
+		if (turn == 1) {
+			document.getElementById("Feld9Div").innerHTML = "X";
+			sit[8] = 1;
+		} else {
+			document.getElementById("Feld9Div").innerHTML = "0";
+			sit[8] = 2;
+		}
+		var looser = won();
+		var wer = toggle();		
+	}
+	document.getElementById("test1").innerHTML = turn;
+	document.getElementById("test2").innerHTML = sit[8];
+}
+
+</script>
+<center> <?php
+	echo "DAS BESTE TIC-TAC-TOE DER WELT:D";
+?> <center>
+    
+  </body>
+</html>
